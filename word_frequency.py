@@ -79,28 +79,21 @@ class WordList:
         extract_words and remove_stop_words. The data structure
         could be a dictionary or another type of object.
         """
-        longest_word = 0
-        for word in self.no_stop_words:
-            if len(word) > longest_word:
-                longest_word = len(word)
-        self.longest = longest_word
         for word in self.no_stop_words:
             if word in word_counts:
                 word_counts[word] += 1
             else:
                 word_counts[word] = 1
         self.word_freqs_descending = (sorted(word_counts.items(), key=lambda seq: seq[1], reverse=True))
-        print (self.word_freqs_descending)
-        print (f" the longest word is {self.longest} characters long.")
-        return self.word_freqs_descending, self.longest
+        #print (self.word_freqs_descending)
+        return self.word_freqs_descending
 
 
 class FreqPrinter:
-    def __init__(self, freqs, longest):
+    def __init__(self, freqs):
         self.freqs = freqs 
-        self.longest = longest
-        print (self.longest)
-        print ("printed inside the printer class")
+        #print (self.freqs)
+        #print ("printed inside the printer class")
 
 
     def print_freqs(self):
@@ -120,7 +113,14 @@ class FreqPrinter:
        rights | 6    ******
         right | 6    ******
         """
-
+        for key, value in self.freqs[:10]:
+            indent = (16 - len(key))
+            space = " "
+            star = "*"
+            if value > 10:
+                print (indent * space, key, " | ", value, space ,value * star)
+            else:
+                print (indent * space, key, " | ", value, 2 * space , value * star)
 
 
 
